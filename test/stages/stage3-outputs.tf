@@ -10,7 +10,7 @@ resource null_resource write_outputs {
         namespace   = module.db2.operator_namespace
         server_name = module.db2.server_name
         layer       = module.db2.layer
-        layer_dir   = module.db2.layer == "infrastructure" ? "1-infrastructure" : (module.db2u.layer == "services" ? "2-services" : "3-applications")
+        layer_dir   = module.db2.layer == "infrastructure" ? "1-infrastructure" : (module.db2.layer == "services" ? "2-services" : "3-applications")
         type        = module.db2.type
       })
     }
