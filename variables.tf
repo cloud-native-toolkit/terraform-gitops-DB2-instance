@@ -80,8 +80,4 @@ variable "server_name" {
   default     = "default"
 }
 
-variable "operator_namespace" {
-  type        = string
-  description = "The namespace where the operators will be installed"
-  default     = "openshift-operators"
-}
+
