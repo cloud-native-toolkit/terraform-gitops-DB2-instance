@@ -5,13 +5,13 @@ resource null_resource write_outputs {
 
     environment = {
       OUTPUT = jsonencode({
-        name        = module.db2u.name
-        branch      = module.db2u.branch
-        namespace   = module.db2u.operator_namespace
-        server_name = module.db2u.server_name
-        layer       = module.db2u.layer
-        layer_dir   = module.db2u.layer == "infrastructure" ? "1-infrastructure" : (module.db2u.layer == "services" ? "2-services" : "3-applications")
-        type        = module.db2u.type
+        name        = module.db2.name
+        branch      = module.db2.branch
+        namespace   = module.db2.operator_namespace
+        server_name = module.db2.server_name
+        layer       = module.db2.layer
+        layer_dir   = module.db2.layer == "infrastructure" ? "1-infrastructure" : (module.db2u.layer == "services" ? "2-services" : "3-applications")
+        type        = module.db2.type
       })
     }
   }
