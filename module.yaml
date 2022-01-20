@@ -1,6 +1,6 @@
-name: ""
+name: "gitops-db2"
 type: gitops
-description: ""
+description: "Module to populate a gitops repo wih the resources to provision IBM DB2"
 tags:
   - tools
   - gitops

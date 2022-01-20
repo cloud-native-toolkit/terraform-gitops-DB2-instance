@@ -1,0 +1,16 @@
+apiVersion: v2
+name: ibm-db2
+#appVersion: 11.5.4.0
+description: A Helm chart for Kubernetes, Db2 Community Edition 11.5.4.0
+type: application
+version: 3.0.2
+appVersion: "1.0"
+
+dependencies:
+- name: service-account
+  version: 0.6.0
+  repository: https://charts.cloudnativetoolkit.dev
+
+
+
+
