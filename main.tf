@@ -7,7 +7,7 @@ locals {
   values_content = {
   }
   layer = "services"
-  type  = "application"
+  type  = "instances"
   application_branch = "main"
   namespace = var.namespace
   layer_config = var.gitops_config[local.layer]
