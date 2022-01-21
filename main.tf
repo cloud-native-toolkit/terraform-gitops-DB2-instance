@@ -4,6 +4,11 @@ locals {
   yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
   sa_name       = "ibm-db2-ibm-db2"
+  layer = "services"
+  type  = "instances"
+  application_branch = "main"
+  namespace = var.namespace
+  layer_config = var.gitops_config[local.layer]
   values_content = {
   }
   layer = "services"
@@ -11,7 +16,7 @@ locals {
   application_branch = "main"
   namespace = var.namespace
   layer_config = var.gitops_config[local.layer]
-}
+ }
 
 module setup_clis {
   source = "github.com/cloud-native-toolkit/terraform-util-clis.git"
