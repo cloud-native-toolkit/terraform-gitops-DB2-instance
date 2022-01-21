@@ -11,11 +11,7 @@ locals {
   layer_config = var.gitops_config[local.layer]
   values_content = {
   }
-  layer = "services"
-  type  = "instances"
-  application_branch = "main"
-  namespace = var.namespace
-  layer_config = var.gitops_config[local.layer]
+  
  }
 
 module setup_clis {
