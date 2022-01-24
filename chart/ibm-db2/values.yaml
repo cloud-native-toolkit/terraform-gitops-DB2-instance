@@ -1,28 +1,27 @@
-apiVersion: db2u.databases.ibm.com/v1
-kind: Db2uCluster
-metadata:
-  name: db2ucluster-sample
-  labels:
-    app.kubernetes.io/instance: db2u-operator
-    app.kubernetes.io/managed-by: Db2U-Team
-    app.kubernetes.io/name: db2u-operator
-  namespace: gitops-db2-instance
-spec:
-  size: 1
-  license:
-    accept: true
-  account:
-    privileged: true
-  environment:
-    dbType: db2oltp
-  version: 11.5.6.0-cn3
-  storage:
-    - name: share
-      type: create
-      spec:
-        accessModes:
+db2instance:
+  name: db2ucluster
+  metadata:    
+    labels:
+      app.kubernetes.io/instance: db2u-operator
+      app.kubernetes.io/managed-by: Db2U-Team
+      app.kubernetes.io/name: db2u-operator
+    
+  spec:
+    size: 1
+    license:
+      accept: true
+    account:
+      privileged: true
+    environment:
+      dbType: db2oltp
+    version: 11.5.6.0-cn3
+    storage:
+      - name: share
+        type: create
+        spec:
+          accessModes:
           - ReadWriteMany
-        resources:
-          requests:
-            storage: 100Gi
-        storageClassName: managed-nfs-storage
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: portworx-db2-rwx-sc

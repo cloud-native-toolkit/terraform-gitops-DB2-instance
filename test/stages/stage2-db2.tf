@@ -1,4 +1,6 @@
 module "db2" {
+  depends_on = [module.gitops-db2]
+  
   source = "./module"
 
   gitops_config = module.gitops.gitops_config
