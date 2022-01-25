@@ -81,3 +81,33 @@ variable "gitops_namespace" {
 
 variable "git_username" {
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "The name of the cluster"
+  default     = ""
+}
+
+variable "name_prefix" {
+  type        = string
+  description = "Prefix name that should be used for the cluster and services. If not provided then resource_group_name will be used"
+  default     = "pwx-test"
+}
+variable "worker_count" {
+  type = number
+  description = "Number of worker nodes"
+  default = 3
+}
+variable "create_external_etcd" {
+  type = bool
+  default = false
+}
+variable "region" {
+    description = "The region Portworx will be installed in: us-south, us-east, eu-gb, eu-de, jp-tok, au-syd, etc.."
+
+}
+variable "workers" {
+    type = list
+    description = "Number of worker nodes"
+}
+ 
