@@ -98,10 +98,11 @@ variable "create_external_etcd" {
 variable "region" {
   type        = string
   description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
-  default     = "us-east"
+  //default     = "us-east"
 }
-/*variable "workers" {
-    type = list
-    description = "Number of worker nodes"
-}*/
+variable "workers" {
+  type        = number
+  description = "Number of worker nodes"
+  default     = 3
+}
  
