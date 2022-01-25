@@ -9,4 +9,5 @@ module "db2" {
   namespace = module.gitops_namespace.name
   kubeseal_cert = module.gitops.sealed_secrets_cert
   workers = module.gitops.workers
+  region = module.gitops.region
 }
