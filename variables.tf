@@ -101,6 +101,7 @@ variable "create_external_etcd" {
   default = false
 }
 variable "region" {
+    type        = string
     description = "The region Portworx will be installed in: us-south, us-east, eu-gb, eu-de, jp-tok, au-syd, etc.."
 
 }
