@@ -7,6 +7,12 @@ module "dev_cluster" {
   login_token = ""
 }
 
+resource null_resource output_kubeconfig {
+  provisioner "local-exec" {
+    command = "echo '${module.dev_cluster.platform.kubeconfig}' > .kubeconfig"
+  }
+}
+
 module "pwx_cluster" {
   source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-vpc.git"
 
@@ -24,6 +30,8 @@ module "pwx_cluster" {
   cos_id              = ""
   login               = "true"
 }
+
+
 
 resource null_resource print_resources {
   triggers = {

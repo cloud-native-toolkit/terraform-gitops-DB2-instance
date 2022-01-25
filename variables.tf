@@ -89,13 +89,9 @@ variable "cluster_name" {
 variable "name_prefix" {
   type        = string
   description = "Prefix name that should be used for the cluster and services. If not provided then resource_group_name will be used"
-  default     = "pwx-test"
+  //default     = "pwx-test"
 }
-variable "worker_count" {
-  type = number
-  description = "Number of worker nodes"
-  default = 3
-}
+
 
 
 
