@@ -24,4 +24,4 @@ db2instance:
           resources:
             requests:
               storage: 100Gi
-          storageClassName: portworx-db2-rwx-sc
+          storageClassName: "ibmc-vpc-block-metro-general-purpose"
