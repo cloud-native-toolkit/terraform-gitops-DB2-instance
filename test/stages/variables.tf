@@ -99,8 +99,8 @@ variable "region" {
     description = "The region Portworx will be installed in: us-south, us-east, eu-gb, eu-de, jp-tok, au-syd, etc.."
 
 }
-variable "workers" {
+/*variable "workers" {
     type = list
     description = "Number of worker nodes"
-}
+}*/
  
