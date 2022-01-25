@@ -98,4 +98,10 @@ variable "workers" {
   default     = 3
 }
 
+variable "region" {
+  type        = string
+  description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
+  
+}
+
  
