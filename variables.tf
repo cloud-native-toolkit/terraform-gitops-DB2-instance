@@ -101,13 +101,14 @@ variable "create_external_etcd" {
   default = false
 }
 variable "region" {
-    type        = string
-    description = "The region Portworx will be installed in: us-south, us-east, eu-gb, eu-de, jp-tok, au-syd, etc.."
-
+  type        = string
+  description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
+  default     = "us-east"
 }
 variable "workers" {
     type = list
     description = "Number of worker nodes"
+
 }
 
 
