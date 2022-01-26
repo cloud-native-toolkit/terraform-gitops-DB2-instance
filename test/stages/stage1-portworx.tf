@@ -8,6 +8,8 @@ module "portworx_module" {
   workers              = module.pwx_cluster.workers
   worker_count         = var.workers
   create_external_etcd = false
-  install_storage      = true
+  install_storage      = false
+  provision            = false
+  
 }
 
