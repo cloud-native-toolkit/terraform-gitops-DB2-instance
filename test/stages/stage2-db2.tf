@@ -1,5 +1,5 @@
 module "db2" {
-  depends_on = [module.gitops-db2,portworx_module]
+  depends_on = [module.gitops-db2,module.portworx_module]
   
   source = "./module"
 
