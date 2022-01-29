@@ -13,6 +13,8 @@ db2instance:
     account:      
       privileged: true
     environment:
+      imagePullSecrets:
+      - ibm-registry
       dbType: db2oltp
     version: 11.5.6.0-cn3
     storage:
