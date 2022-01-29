@@ -10,7 +10,7 @@ db2instance:
     size: 1
     license:
       accept: true
-    account:
+    account:      
       privileged: true
     environment:
       dbType: db2oltp

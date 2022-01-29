@@ -81,27 +81,17 @@ variable "cluster_name" {
   default     = ""
 }
 
-variable "name_prefix" {
-  type        = string
-  description = "Prefix name that should be used for the cluster and services. If not provided then resource_group_name will be used"
-  default     = "pwx-test"
+variable "kubeseal_namespace" {
+  default = "sealed-secrets"
 }
 
-variable "create_external_etcd" {
-  type = bool
-  default = false
+variable "cp_entitlement_key" {
 }
 
-variable "workers" {
-  type        = number
-  description = "Number of worker nodes"
-  default     = 3
-}
 
-variable "region" {
-  type        = string
-  description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
-  
-}
+
+
+
+
 
  
