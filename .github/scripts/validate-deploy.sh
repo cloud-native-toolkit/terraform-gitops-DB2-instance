@@ -50,7 +50,7 @@ else
   sleep 30
 fi
 sleep 5m
-DEPLOYMENT="c-db2ucluster-sam-ldap"
+DEPLOYMENT="c-db2ucluster-ldap"
 count=0
 until kubectl get deployment "${DEPLOYMENT}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
   echo "Waiting for deployment/${DEPLOYMENT} in ${NAMESPACE}"

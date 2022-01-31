@@ -29,7 +29,7 @@ module pull_secret {
   docker_username = "cp"
   docker_password = var.entitlement_key
   docker_server   = "cp.icr.io"
-  secret_name     = "ibm-entitlement-key"
+  secret_name     = "ibm-entitlement-key-s"
 }
 
 resource null_resource create_yaml {

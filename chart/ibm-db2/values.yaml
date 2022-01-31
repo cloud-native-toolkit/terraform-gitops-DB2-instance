@@ -14,7 +14,7 @@ db2instance:
       privileged: true
     environment:
       imagePullSecrets:
-      - ibm-entitlement-key
+       - ibm-entitlement-key-s
       dbType: db2oltp
     version: 11.5.6.0-cn3
     storage:
@@ -22,7 +22,7 @@ db2instance:
         type: create
         spec:
           accessModes:
-          - ReadWriteMany
+           - ReadWriteMany
           resources:
             requests:
               storage: 100Gi
