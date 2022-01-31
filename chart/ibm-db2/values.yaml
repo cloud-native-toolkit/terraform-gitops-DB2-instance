@@ -14,7 +14,9 @@ db2instance:
       imagePullSecrets:
        - ibm-entitlement-key-s      
       privileged: true
-    environment:      
+    environment:
+      database:
+        name: OMDB      
       dbType: db2oltp
     version: 11.5.6.0-cn3
     storage:
