@@ -45,7 +45,7 @@ This module makes use of the output from other modules:
 
 ```hcl-terraform
 module "db2" {
-  source = "./module"
+  source = "github.com/cloud-native-toolkit/terraform-gitops-db2-instance.git"
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials

@@ -68,12 +68,6 @@ variable "namespace" {
   description = "The namespace where the application should be deployed"
 }
 
-variable "kubeseal_cert" {
-  type        = string
-  description = "The certificate/public key used to encrypt the sealed secrets"
-  default     = ""
-}
-
 variable "server_name" {
   type        = string
   description = "The name of the server"
