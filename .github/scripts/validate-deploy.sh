@@ -5,11 +5,11 @@ GIT_TOKEN=$(cat git_token)
 
 export KUBECONFIG=$(cat .kubeconfig)
 NAMESPACE=$(cat .namespace)
-COMPONENT_NAME=$(jq -r '.name // "my-module"' gitops-output.json)
+COMPONENT_NAME=$(jq -r '.name // "ibm-db2"' gitops-output.json)
 BRANCH=$(jq -r '.branch // "main"' gitops-output.json)
 SERVER_NAME=$(jq -r '.server_name // "default"' gitops-output.json)
 LAYER=$(jq -r '.layer_dir // "2-services"' gitops-output.json)
-TYPE=$(jq -r '.type // "base"' gitops-output.json)
+TYPE=$(jq -r '.type // "instances"' gitops-output.json)
 
 mkdir -p .testrepo
 
@@ -49,8 +49,8 @@ else
   echo "Found namespace: ${NAMESPACE}. Sleeping for 30 seconds to wait for everything to settle down"
   sleep 30
 fi
-
-DEPLOYMENT="${COMPONENT_NAME}-${BRANCH}"
+sleep 5m
+DEPLOYMENT="c-db2ucluster-ldap"
 count=0
 until kubectl get deployment "${DEPLOYMENT}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
   echo "Waiting for deployment/${DEPLOYMENT} in ${NAMESPACE}"

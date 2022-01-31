@@ -12,3 +12,4 @@ resource null_resource output_kubeconfig {
     command = "echo '${module.dev_cluster.platform.kubeconfig}' > .kubeconfig"
   }
 }
+
