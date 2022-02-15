@@ -25,7 +25,7 @@ The module depends on the following software components:
 
 ### Command-line tools
 
-- terraform - v12
+- terraform - > v0.15
 - kubectl
 
 ### Terraform providers
@@ -45,13 +45,15 @@ This module makes use of the output from other modules:
 
 ```hcl-terraform
 module "db2" {
+  depends_on = [module.gitops-db2]
   source = "github.com/cloud-native-toolkit/terraform-gitops-db2-instance.git"
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
-  namespace = module.gitops_namespace.name
+  namespace = "gitops-cp4d-instance"
   kubeseal_cert = module.gitops.sealed_secrets_cert
+  entitlement_key = module.cp_catalogs.entitlement_key
 }
 ```
 
@@ -124,9 +126,9 @@ When a release is created, a repository dispatch is sent out to the repositories
 The module metadata adds extra descriptive information about the module that is used to build out the module catalog.
 
 ```yaml
-name: ""
+name: "gitops-db2-instance"
 type: gitops
-description: ""
+description: "Module to populate a gitops repo wih the resources to provision IBM DB2"
 tags:
   - tools
   - gitops
@@ -144,6 +146,10 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
             version: ">= 1.0.0"
+      - id: gitops-db2
+        refs:
+          - source: https://github.com/cloud-native-toolkit/terraform-gitops-db2u-operator.git
+            version: ">= 1.0.0"      
     variables:
       - name: gitops_config
         moduleRef:
@@ -165,6 +171,7 @@ versions:
         moduleRef:
           id: gitops
           output: sealed_secrets_cert
+
 ```
 
 - **name** - The `name` field is required and must be unique among the other modules. This value is used to reference the module in the Bill of Materials.

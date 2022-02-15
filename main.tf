@@ -10,15 +10,25 @@ locals {
   namespace = var.namespace
   layer_config = var.gitops_config[local.layer]
   values_content = {
-  }
-  
- }
+    "db2instance" = {
+       name = local.name
+       spec = {
+        license = {
+         accept = true
+         license = var.license     
+         db_type = "db2oltp"
+          }
+        }
+      }
+    }  
+    values_file = "values-${var.server_name}.yaml"
+}
 
 module setup_clis {
   source = "github.com/cloud-native-toolkit/terraform-util-clis.git"
 }
 
-module pull_secret {
+/*module pull_secret {
   source = "github.com/cloud-native-toolkit/terraform-gitops-pull-secret"
 
   gitops_config = var.gitops_config
@@ -30,7 +40,7 @@ module pull_secret {
   docker_password = var.entitlement_key
   docker_server   = "cp.icr.io"
   secret_name     = "ibm-entitlement-key-s"
-}
+}*/
 
 resource null_resource create_yaml {
   provisioner "local-exec" {

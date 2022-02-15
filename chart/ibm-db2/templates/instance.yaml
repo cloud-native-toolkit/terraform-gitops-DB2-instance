@@ -1,6 +1,6 @@
 
-apiVersion: db2u.databases.ibm.com/v1
-kind: Db2uCluster        
+apiVersion: databases.cpd.ibm.com/v1
+kind: Db2oltpService       
 metadata:
   name: {{ .Values.db2instance.name }}
 spec:

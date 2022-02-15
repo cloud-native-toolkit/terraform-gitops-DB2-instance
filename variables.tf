@@ -66,6 +66,7 @@ variable "git_credentials" {
 variable "namespace" {
   type        = string
   description = "The namespace where the application should be deployed"
+  default     = "gitops-cp4d-instance"
 }
 
 variable "server_name" {
@@ -90,6 +91,16 @@ variable "kubeseal_cert" {
   type        = string
   description = "The certificate/public key used to encrypt the sealed secrets"
 }
+
+license
+
+variable "license" {
+  type        = string
+  description = "Specify the license you purchased, Advanced | Standard | Community"
+  default     = "Community"
+}
+
+
 
 
 
