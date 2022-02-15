@@ -1,5 +1,5 @@
 db2instance:
-  name: db2oltp-cr4
+  name: db2oltp-cr6
      
   spec:
    license:
