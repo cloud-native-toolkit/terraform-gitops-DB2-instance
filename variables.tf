@@ -92,8 +92,6 @@ variable "kubeseal_cert" {
   description = "The certificate/public key used to encrypt the sealed secrets"
 }
 
-license
-
 variable "license" {
   type        = string
   description = "Specify the license you purchased, Advanced | Standard | Community"
