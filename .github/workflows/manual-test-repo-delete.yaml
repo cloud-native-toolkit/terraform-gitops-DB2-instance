@@ -28,7 +28,7 @@ jobs:
       - name: Delete test repo
         run: |
           GIT_SLUG=${{ steps.variables.outputs.org }}/${{ steps.variables.outputs.repo }}
-          if [[ "${GIT_SLUG}" == ${{ GITHUB_REPOSITORY }} ]]; then
+          if [[ "${GIT_SLUG}" == ${{ github.repository }} ]]; then
             echo "You cannot delete the current repository!!!!"
             exit 1
           fi
