@@ -8,7 +8,7 @@ module "cp-db2" {
   server_name = module.gitops.server_name
   #namespace = "gitops-cp4d-instance"
   kubeseal_cert = module.gitops.sealed_secrets_cert
-  //entitlement_key = module.cp_catalogs.entitlement_key
+  entitlement_key = var.cp_entitlement_key
   operator_namespace= "cpd-operators"
   cpd_namespace = "gitops-cp4d-instance"
 }
