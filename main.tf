@@ -61,15 +61,7 @@ module setup_clis {
   secret_name     = "ibm-entitlement-key-s"
 }*/
 
-resource null_resource create_subcription_yaml {
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${local.subscription_name}' '${local.subscription_yaml_dir}'"
 
-    environment = {
-      VALUES_CONTENT = yamlencode(local.subscription_content)
-    }
-  }
-}
 
 /*module "service_account" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-service-account.git"
