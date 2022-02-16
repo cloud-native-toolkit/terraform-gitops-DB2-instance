@@ -44,16 +44,17 @@ This module makes use of the output from other modules:
 ## Example usage
 
 ```hcl-terraform
-module "db2" {
+module "cp-db2" {
   depends_on = [module.gitops-db2]
   source = "github.com/cloud-native-toolkit/terraform-gitops-db2-instance.git"
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
-  namespace = "gitops-cp4d-instance"
+  namespace = module.gitops_namespace.name
   kubeseal_cert = module.gitops.sealed_secrets_cert
-  entitlement_key = module.cp_catalogs.entitlement_key
+  operator_namespace= "cpd-operators"  
+  cpd_namespace = "gitops-cp4d-instance" 
 }
 ```
 
