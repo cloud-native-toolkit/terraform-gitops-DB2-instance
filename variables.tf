@@ -81,12 +81,6 @@ variable "cluster_name" {
   default     = ""
 }
 
-variable "entitlement_key" {
-  type        = string
-  description = "The entitlement key required to access Cloud Pak images"
-  sensitive   = true
-}
-
 variable "kubeseal_cert" {
   type        = string
   description = "The certificate/public key used to encrypt the sealed secrets"
