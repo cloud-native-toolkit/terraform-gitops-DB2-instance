@@ -6,7 +6,7 @@ locals {
   subscription_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
   instance_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
-  sa_name       = "ibm-db2-ibm-db2"
+  //sa_name       = "ibm-db2-ibm-db2"
   layer = "services"
   operator_type  = "operators"
   type  = "instances"

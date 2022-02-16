@@ -8,7 +8,7 @@ module "gitops-bootstrap" {
   bootstrap_path      = module.gitops.bootstrap_path
   sealed_secret_cert  = module.cert.cert
   sealed_secret_private_key = module.cert.private_key
-  prefix              = "db2u-instance"
+  prefix              = var.bootstrap_prefix
   kubeseal_namespace  = var.kubeseal_namespace
-  create_webhook      = true  
+  create_webhook      = true
 }
