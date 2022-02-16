@@ -34,10 +34,7 @@ locals {
         accept = "true"
         license = var.license 
         db_type = "db2oltp"
-        }
-      //version = "4.0.5"
-      //storageVendor = "portworx"
-      //storageClass = "portworx-shared-gp3"
+        }      
       }               
     }   
     //values_file = "values-${var.server_name}.yaml"

@@ -7,6 +7,15 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 MODULE_DIR=$(cd "${SCRIPT_DIR}/.."; pwd -P)
 CHART_DIR=$(cd "${MODULE_DIR}/charts/${NAME}"; pwd -P)
 
+echo "Name"
+echo "${NAME}"
+
+echo "DEST Dir"
+echo "${DEST_DIR}"
+
+echo "Chart Dir"
+echo "${CHART_DIR}"
+
 mkdir -p $DEST_DIR
 
 ## Add logic here to put the yaml resource content in DEST_DIR
