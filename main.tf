@@ -1,12 +1,12 @@
 locals {
-  name          = "db2oltp-cr"
-  subscription_name  = "ibm-db2oltp-cp4d-operator-catalog-subscription"
+  name          = "ibm-cpd-db2-instance"
+  subscription_name  = "ibm-cpd-db2-subscription"
   bin_dir       = module.setup_clis.bin_dir
   //yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   subscription_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
   instance_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
-  //sa_name       = "ibm-db2-ibm-db2"
+  sa_name       = "ibm-db2-ibm-db2"
   layer = "services"
   operator_type  = "operators"
   type  = "instances"
