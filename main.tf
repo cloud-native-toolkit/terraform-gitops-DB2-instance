@@ -1,6 +1,6 @@
 locals {
-  name          = "ibm-cpd-db2-instance"
-  subscription_name  = "ibm-cpd-db2-subscription"
+  name          = "db2oltp-cr"
+  subscription_name  = "ibm-db2oltp-cp4d-operator-catalog-subscription"
   bin_dir       = module.setup_clis.bin_dir
   //yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   subscription_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
@@ -14,7 +14,7 @@ locals {
   namespace = var.namespace
   layer_config = var.gitops_config[local.layer]
   subscription_content = {
-    name = "ibm-db2oltp-cp4d-operator-catalog-subscription"
+    name = local.subscription_name
     operator_namespace = var.operator_namespace
     syncWave = "-5"
     spec = {
@@ -27,7 +27,7 @@ locals {
   } 
   
   instance_content = {
-    name = "db2oltp-cr"
+    name = local.name
     cpd_namespace = var.cpd_namespace
     spec = {
       license = {

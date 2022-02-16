@@ -69,7 +69,7 @@ cat "payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
 
 
 
-#COMPONENT_NAME="ibm-sls-operator-instance"
+
 TYPE="instances"
 
 if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml" ]]; then
