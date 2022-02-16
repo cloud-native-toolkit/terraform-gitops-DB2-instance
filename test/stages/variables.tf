@@ -89,6 +89,18 @@ variable "cp_entitlement_key" {
 }
 
 
+variable "cluster_password" {
+  type        = string
+  description = "The password for AWS access"
+}
+
+variable "cpd_common_services_namespace" {
+  type        = string
+  description = "Namespace for cpd commmon services"
+  default = "cpd-operators"
+}
+
+
 
 
 
