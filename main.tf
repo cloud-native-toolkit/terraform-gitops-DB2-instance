@@ -14,20 +14,20 @@ locals {
   namespace = var.namespace
   layer_config = var.gitops_config[local.layer]
   subscription_content = {
-    name = local.subscription_name
+    name = "ibm-db2oltp-cp4d-operator-catalog-subscription"
     operator_namespace = var.operator_namespace
     syncWave = "-5"
     spec = {
       channel = var.channel
       installPlanApproval = "Automatic"
       name = "ibm-db2oltp-cp4d-operator"
-      source = local.subscription_name
+      source = "ibm-operator-catalog"
       sourceNamespace = var.subscription_source_namespace        
     }       
   } 
   
   instance_content = {
-    name = local.name
+    name = "db2oltp-cr2"
     cpd_namespace = var.cpd_namespace
     spec = {
       license = {

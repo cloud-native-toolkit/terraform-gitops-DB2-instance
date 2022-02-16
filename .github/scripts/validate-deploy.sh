@@ -3,17 +3,8 @@
 GIT_REPO=$(cat git_repo)
 GIT_TOKEN=$(cat git_token)
 
-#export KUBECONFIG=$(cat .kubeconfig)
-#NAMESPACE="gitops-cp4d-instance"
-#COMPONENT_NAME=$(jq -r '.name // "ibm-db2"' gitops-output.json)
-#BRANCH=$(jq -r '.branch // "main"' gitops-output.json)
-#SERVER_NAME=$(jq -r '.server_name // "default"' gitops-output.json)
-#LAYER=$(jq -r '.layer_dir // "2-services"' gitops-output.json)
-#TYPE=$(jq -r '.type // "instances"' gitops-output.json)
-
 export KUBECONFIG=$(cat .kubeconfig)
-#NAMESPACE=$(cat .namespace)
-NAMESPACE= "gitops-cp4d-instance"
+NAMESPACE=$(cat .namespace)
 COMPONENT_NAME=$(jq -r '.name // "my-module"' gitops-output.json)
 SUBSCRIPTION_NAME=$(jq -r '.sub_name // "sub_name"' gitops-output.json)
 OPERATOR_NAMESPACE=$(jq -r '.operator_namespace // "operator_namespace"' gitops-output.json)
@@ -21,7 +12,7 @@ CPD_NAMESPACE=$(jq -r '.cpd_namespace // "cpd_namespace"' gitops-output.json)
 BRANCH=$(jq -r '.branch // "main"' gitops-output.json)
 SERVER_NAME=$(jq -r '.server_name // "default"' gitops-output.json)
 LAYER=$(jq -r '.layer_dir // "2-services"' gitops-output.json)
-#TYPE=$(jq -r '.type // "instances"' gitops-output.json)
+TYPE=$(jq -r '.type // "base"' gitops-output.json)
 
 mkdir -p .testrepo
 
@@ -30,48 +21,6 @@ git clone https://${GIT_TOKEN}@${GIT_REPO} .testrepo
 cd .testrepo || exit 1
 
 find . -name "*"
-
-#if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml" ]]; then
-#  echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
-#  exit 1
-#fi
-
-#echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
-#cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
-
-#if [[ ! -f "payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml" ]]; then
-#  echo "Application values not found - payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
-#  exit 1
-#fi
-
-#echo "Printing payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
-#cat "payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
-
-
-TYPE="operators"
-
-if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml" ]]; then
-  echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
-  exit 1
-fi
-
-echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
-cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
-
-if [[ ! -f "payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml" ]]; then
-  echo "Application values not found - payload/2-services/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
-  exit 1
-fi
-
-echo "Printing payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
-cat "payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
-
-
-
-
-
-
-TYPE="instances"
 
 if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml" ]]; then
   echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
@@ -82,16 +31,15 @@ echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COM
 cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
 
 if [[ ! -f "payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml" ]]; then
-  echo "Application values not found - payload/2-services/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
+  echo "Application values not found - payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
   exit 1
 fi
 
 echo "Printing payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
 cat "payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
 
-
 count=0
-until kubectl get namespace "${NAMESPACE}" 1> /dev/null 2> /dev/null || [[ $count -eq 20 ]]; do
+until kubectl get namespace "${NAMESPACE}" 1>/dev/null 2>/dev/null || [[ $count -eq 20 ]]; do
   echo "Waiting for namespace: ${NAMESPACE}"
   count=$((count + 1))
   sleep 15
@@ -104,7 +52,7 @@ else
   echo "Found namespace: ${NAMESPACE}. Sleeping for 30 seconds to wait for everything to settle down"
   sleep 30
 fi
-//sleep 5m
+
 echo "OPERATOR_NAMESPACE ***** "${OPERATOR_NAMESPACE}""
 echo "SUBSCRIPTION_NAME *****"${SUBSCRIPTION_NAME}""
 sleep 15

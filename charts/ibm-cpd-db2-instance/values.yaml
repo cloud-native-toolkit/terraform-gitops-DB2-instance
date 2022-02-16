@@ -5,6 +5,6 @@ db2instance:
    license:
     accept: true
     license: Community     # Specify the license you purchased
-    db_type: db2oltp
+    
 
 

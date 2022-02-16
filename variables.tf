@@ -95,7 +95,7 @@ variable "kubeseal_cert" {
 variable "license" {
   type        = string
   description = "Specify the license you purchased, Advanced | Standard | Community"
-  default     = "Community"
+  default     = "Advanced"
 }
 
 variable "subscription_source_namespace" {
