@@ -1,6 +1,6 @@
 locals {
   name          = "ibm-cpd-db2-instance"
-  subscription_name  = "ibm-db2oltp-cp4d-operator"
+  subscription_name  = "ibm-cpd-db2-subscription"
   bin_dir       = module.setup_clis.bin_dir
   //yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   subscription_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
@@ -27,7 +27,7 @@ locals {
   } 
   
   instance_content = {
-    name = local.name
+    name = "db2oltp-cr"
     cpd_namespace = var.cpd_namespace
     spec = {
       license = {
