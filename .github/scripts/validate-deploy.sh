@@ -50,21 +50,21 @@ find . -name "*"
 
 TYPE="operators"
 
-if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${OPERATOR_NAMESPACE}-${SUBSCRIPTION_NAME}.yaml" ]]; then
-  echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${OPERATOR_NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
+if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml" ]]; then
+  echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
   exit 1
 fi
 
-echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${OPERATOR_NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
-cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${OPERATOR_NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
+echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
+cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${SUBSCRIPTION_NAME}.yaml"
 
-if [[ ! -f "payload/${LAYER}/namespace/${OPERATOR_NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml" ]]; then
-  echo "Application values not found - payload/2-services/namespace/${OPERATOR_NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
+if [[ ! -f "payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml" ]]; then
+  echo "Application values not found - payload/2-services/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
   exit 1
 fi
 
-echo "Printing payload/${LAYER}/namespace/${OPERATOR_NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
-cat "payload/${LAYER}/namespace/${OPERATOR_NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
+echo "Printing payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
+cat "payload/${LAYER}/namespace/${NAMESPACE}/${SUBSCRIPTION_NAME}/values.yaml"
 
 
 
@@ -73,21 +73,21 @@ cat "payload/${LAYER}/namespace/${OPERATOR_NAMESPACE}/${SUBSCRIPTION_NAME}/value
 
 TYPE="instances"
 
-if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${CPD_NAMESPACE}-${COMPONENT_NAME}.yaml" ]]; then
-  echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${CPD_NAMESPACE}-${COMPONENT_NAME}.yaml"
+if [[ ! -f "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml" ]]; then
+  echo "ArgoCD config missing - argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
   exit 1
 fi
 
-echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${CPD_NAMESPACE}-${COMPONENT_NAME}.yaml"
-cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${CPD_NAMESPACE}-${COMPONENT_NAME}.yaml"
+echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
+cat "argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
 
-if [[ ! -f "payload/${LAYER}/namespace/${CPD_NAMESPACE}/${COMPONENT_NAME}/values.yaml" ]]; then
-  echo "Application values not found - payload/2-services/namespace/${CPD_NAMESPACE}/${COMPONENT_NAME}/values.yaml"
+if [[ ! -f "payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml" ]]; then
+  echo "Application values not found - payload/2-services/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
   exit 1
 fi
 
-echo "Printing payload/${LAYER}/namespace/${CPD_NAMESPACE}/${COMPONENT_NAME}/values.yaml"
-cat "payload/${LAYER}/namespace/${CPD_NAMESPACE}/${COMPONENT_NAME}/values.yaml"
+echo "Printing payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
+cat "payload/${LAYER}/namespace/${NAMESPACE}/${COMPONENT_NAME}/values.yaml"
 
 
 count=0
