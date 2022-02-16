@@ -20,7 +20,7 @@ CPD_NAMESPACE=$(jq -r '.cpd_namespace // "cpd_namespace"' gitops-output.json)
 BRANCH=$(jq -r '.branch // "main"' gitops-output.json)
 SERVER_NAME=$(jq -r '.server_name // "default"' gitops-output.json)
 LAYER=$(jq -r '.layer_dir // "2-services"' gitops-output.json)
-TYPE=$(jq -r '.type // "base"' gitops-output.json)
+TYPE=$(jq -r '.type // "instances"' gitops-output.json)
 
 mkdir -p .testrepo
 
