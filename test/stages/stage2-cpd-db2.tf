@@ -1,5 +1,5 @@
-module "db2" {
-  depends_on = [module.gitops-db2]
+module "cp-db2" {
+  #depends_on = [module.gitops-db2]
   
   source = "./module"
 
@@ -9,5 +9,9 @@ module "db2" {
   namespace = "gitops-cp4d-instance"
   kubeseal_cert = module.gitops.sealed_secrets_cert
   entitlement_key = module.cp_catalogs.entitlement_key
-  
+  operator_namespace= "cpd-operators"
+  cpd_namespace = "gitops-cp4d-instance"
 }
+
+
+
