@@ -1,8 +1,7 @@
 locals {
   name          = "ibm-cpd-db2-instance"
   subscription_name  = "ibm-cpd-db2-subscription"
-  bin_dir       = module.setup_clis.bin_dir
-  //yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
+  bin_dir       = module.setup_clis.bin_dir  
   subscription_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
   instance_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
@@ -36,41 +35,12 @@ locals {
         db_type = "db2oltp"
         }      
       }               
-    }   
-    //values_file = "values-${var.server_name}.yaml"
+    }    
 }
 
 module setup_clis {
   source = "github.com/cloud-native-toolkit/terraform-util-clis.git"
 }
-
-/*module pull_secret {
-  source = "github.com/cloud-native-toolkit/terraform-gitops-pull-secret"
-
-  gitops_config = var.gitops_config
-  git_credentials = var.git_credentials
-  server_name = var.server_name
-  kubeseal_cert = var.kubeseal_cert
-  namespace = var.namespace
-  docker_username = "cp"
-  docker_password = var.entitlement_key
-  docker_server   = "cp.icr.io"
-  secret_name     = "ibm-entitlement-key-s"
-}*/
-
-
-
-/*module "service_account" {
-  source = "github.com/cloud-native-toolkit/terraform-gitops-service-account.git"
-
-  gitops_config = var.gitops_config
-  git_credentials = var.git_credentials
-  namespace = var.namespace
-  name = local.sa_name
-  sccs = ["anyuid", "privileged"]
-  server_name = var.server_name
-}*/
-
 resource null_resource create_subcription_yaml {
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-yaml.sh '${local.subscription_name}' '${local.subscription_yaml_dir}'"

@@ -1,3 +1,11 @@
+# Cloud Pak for Data, db2oltp Subscription and Db2oltpService instance gitops module
+
+Module to provision a gitops repo with the resources necessary to provision a Cloud Pak for data,ibm-db2oltp-cp4d-operator Subscription and Db2oltpService instance on a cluster. In order to provision Subscription and the instance, the following steps are performed:
+
+1. Add the db2oltp Subscription chart to the gitops repo (charts/ibm-cpd-db2-subscription)
+2. Add the Db2oltpService instance chart to the gitops repo (charts/ibm-cpd-db2-instance)
+
+
 # Starter kit for a Terraform GitOps module
 
 This is a Starter kit to help with the creation of Terraform modules. The basic structure of a Terraform module is fairly

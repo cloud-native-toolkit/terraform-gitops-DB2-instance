@@ -1,4 +1,4 @@
-name: gitops-cp-db2-oltp
+name: "gitops-db2-instance"
 type: gitops
 description: "Module to populate a gitops repo wih the resources to provision IBM DB2"
 tags:
@@ -18,9 +18,25 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
             version: ">= 1.0.0"
+      - id: gitops_ibm_catalogs
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git
+            version: ">= 1.0.0"
+      - id: gitops_cp_foundation
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp-foundational-services.git
+            version: ">= 1.0.0"
+      - id: gitops_cp4d_operator
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp4d-operator.git
+            version: ">= 1.0.0"
+      - id: gitops-cp4d-instance
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp4d-instance.git
+            version: ">= 1.0.0"      
       - id: gitops-db2
         refs:
-          - source: https://github.com/cloud-native-toolkit/terraform-gitops-db2u-operator.git
+          - source: github.com/cloud-native-toolkit/terraform-gitops-db2u-operator.git
             version: ">= 1.0.0"      
     variables:
       - name: gitops_config
