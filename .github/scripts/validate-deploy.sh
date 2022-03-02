@@ -68,7 +68,7 @@ done
 
 echo "CPD_NAMESPACE *****"${CPD_NAMESPACE}""
 sleep 30
-INST_STATUS=$(kubectl get Db2oltpService db2oltp-cr7 -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
+INST_STATUS=$(kubectl get Db2oltpService db2oltp-cr -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
 echo "DB2 Db2oltpService/db2oltp-cr7 is ${INST_STATUS}"
 
 cd ..
