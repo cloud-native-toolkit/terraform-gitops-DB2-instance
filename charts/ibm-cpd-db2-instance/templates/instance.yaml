@@ -1,0 +1,15 @@
+
+apiVersion: databases.cpd.ibm.com/v1
+kind: Db2oltpService       
+metadata:
+  name: {{ .Values.db2instance.name }}
+  namespace: {{ .Values.cpd_namespace }}
+spec:  
+  license:
+    accept: true
+    license: Advanced     # Specify the license you purchased
+
+
+
+    
+    

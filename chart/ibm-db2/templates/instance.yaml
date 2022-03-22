@@ -1,7 +1,0 @@
-
-apiVersion: db2u.databases.ibm.com/v1
-kind: Db2uCluster        
-metadata:
-  name: {{ .Values.db2instance.name }}
-spec:
-  {{- toYaml .Values.db2instance.spec | nindent 2 }}

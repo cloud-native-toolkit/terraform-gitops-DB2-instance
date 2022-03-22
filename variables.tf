@@ -66,6 +66,7 @@ variable "git_credentials" {
 variable "namespace" {
   type        = string
   description = "The namespace where the application should be deployed"
+  default     = "gitops-cp4d-instance"
 }
 
 variable "server_name" {
@@ -80,16 +81,42 @@ variable "cluster_name" {
   default     = ""
 }
 
-variable "entitlement_key" {
-  type        = string
-  description = "The entitlement key required to access Cloud Pak images"
-  sensitive   = true
-}
-
 variable "kubeseal_cert" {
   type        = string
   description = "The certificate/public key used to encrypt the sealed secrets"
 }
+
+variable "license" {
+  type        = string
+  description = "Specify the license you purchased, Advanced | Standard | Community"
+  default     = "Advanced"
+}
+
+variable "subscription_source_namespace" {
+  type        = string
+  description = "The namespace where the catalog has been deployed"
+  default     = "openshift-marketplace"
+}
+
+variable "channel" {
+  type        = string
+  description = "The channel that should be used to deploy the operator"
+  default     = "v1.0"
+}
+
+variable "operator_namespace" {
+  type        = string
+  description = "CPD operator namespace"
+  default = "cpd-operators"
+}
+
+variable "cpd_namespace" {
+  type        = string
+  description = "CPD namespace"
+  default = "gitops-cp4d-instance"
+}
+
+
 
 
 
