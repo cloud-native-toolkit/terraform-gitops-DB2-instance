@@ -1,5 +1,4 @@
-module "cp-db2" {
-  #depends_on = [module.gitops-db2]
+module "cp-db2" {  
   
   source = "./module"
 
