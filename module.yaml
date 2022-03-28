@@ -1,4 +1,4 @@
-name: "gitops-db2-instance"
+name: "gitops-db2-oltp"
 type: gitops
 description: "Module to populate a gitops repo wih the resources to provision IBM DB2"
 tags:
