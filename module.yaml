@@ -23,22 +23,22 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git
             version: ">= 1.0.0"
-      - id: gitops_cp_foundation
+      - id: ibm-common-service
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-cp-foundational-services.git
             version: ">= 1.0.0"
-      - id: gitops_cp4d_operator
+      - id: gitops-cp4d-operator
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-cp4d-operator.git
-            version: ">= 1.0.0"
+            version: ">= 0.0.1"
       - id: gitops-cp4d-instance
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-cp4d-instance.git
-            version: ">= 1.0.0"      
+            version: ">= 0.0.1"      
       - id: gitops-db2
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-db2u-operator.git
-            version: ">= 1.0.0"      
+            version: ">= 0.0.1"      
     variables:
       - name: gitops_config
         moduleRef:
