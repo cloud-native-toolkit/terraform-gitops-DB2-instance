@@ -71,7 +71,7 @@ sleep 30
 INST_STATUS=$(kubectl get Db2oltpService db2oltp-cr -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
 echo "DB2 Db2oltpService/db2oltp-cr is ${INST_STATUS}"
 
-oc delete job db2oltp-operandreg-job
+oc delete job db2oltp-operandreg-job -n gitops-cp-db2-oltp
 
 cd ..
 rm -rf .testrepo
