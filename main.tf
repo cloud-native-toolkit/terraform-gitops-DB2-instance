@@ -51,6 +51,16 @@ resource null_resource create_subcription_yaml {
   }
 }
 
+module setup_service_account {
+  source = "github.com/cloud-native-toolkit/terraform-gitops-service-account.git"
+
+  gitops_config = var.gitops_config
+  git_credentials = var.git_credentials
+  namespace = var.cpd_namespace
+  name = "db2oltp-operandreg-sa"
+  server_name = var.server_name  
+}
+
 resource null_resource setup_gitops_subscription {
   depends_on = [null_resource.create_subcription_yaml]
 
