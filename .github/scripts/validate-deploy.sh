@@ -54,7 +54,7 @@ else
 fi
 
 #temporary cleanup
-oc delete job db2oltp-operandreg-job -n gitops-cp-db2-oltp
+#oc delete job db2oltp-operandreg-job -n gitops-cp-db2-oltp
 
 echo "OPERATOR_NAMESPACE ***** "${OPERATOR_NAMESPACE}""
 echo "SUBSCRIPTION_NAME *****"${SUBSCRIPTION_NAME}""
