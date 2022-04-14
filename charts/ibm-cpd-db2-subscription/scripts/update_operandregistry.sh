@@ -9,7 +9,7 @@ oc get operandregistry common-service -n ${COMMON_SERVICES_NAMESPACE} -o json > 
 
 echo "success 2"
 
-jq '(.spec.operators[] | select(.name == "ibm-db2u-operator")).namespace = ${ZEN_OPERATORS_NAMESPACE}' /temp/operandregistry.json > /temp/operandregistry_new.json
+jq --arg ZEN_OPERATORS_NAMESPACE $ZEN_OPERATORS_NAMESPACE '(.spec.operators[] | select(.name == "ibm-db2u-operator")).namespace |= $ZEN_OPERATORS_NAMESPACE' /temp/operandregistry.json > /temp/operandregistry_new.json
 
 echo "success 3"
 
