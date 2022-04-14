@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ZEN_OPERATORS_NAMESPACE="${ZEN_OPERATORS_NAMESPACE}"
-COMMAN_SERVICES_NAMESPACE="${COMMAN_SERVICES_NAMESPACE}"
+COMMON_SERVICES_NAMESPACE="${COMMON_SERVICES_NAMESPACE}"
 
 echo "success 1"
 
-oc get operandregistry common-service -n ${COMMAN_SERVICES_NAMESPACE} -o json > /temp/operandregistry.json
+oc get operandregistry common-service -n ${COMMON_SERVICES_NAMESPACE} -o json > /temp/operandregistry.json
 
 echo "success 2"
 

@@ -35,7 +35,7 @@ spec:
         args:
           - /scripts/update_operandregistry.sh 
         env:
-          - name: COMMAN_SERVICES_NAMESPACE
-            value: {{ .Values.COMMAN_SERVICES_NAMESPACE }}
+          - name: COMMON_SERVICES_NAMESPACE
+            value: {{ .Values.common_services_namespace }}
           - name: ZEN_OPERATORS_NAMESPACE
             value: {{ .Values.operator_namespace }}

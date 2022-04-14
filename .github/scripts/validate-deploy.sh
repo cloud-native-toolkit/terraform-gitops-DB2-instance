@@ -53,6 +53,9 @@ else
   sleep 30
 fi
 
+#temporary cleanup
+oc delete job db2oltp-operandreg-job -n gitops-cp-db2-oltp
+
 echo "OPERATOR_NAMESPACE ***** "${OPERATOR_NAMESPACE}""
 echo "SUBSCRIPTION_NAME *****"${SUBSCRIPTION_NAME}""
 sleep 15
@@ -70,8 +73,6 @@ echo "CPD_NAMESPACE *****"${CPD_NAMESPACE}""
 sleep 30
 INST_STATUS=$(kubectl get Db2oltpService db2oltp-cr -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
 echo "DB2 Db2oltpService/db2oltp-cr is ${INST_STATUS}"
-
-oc delete job db2oltp-operandreg-job -n gitops-cp-db2-oltp
 
 cd ..
 rm -rf .testrepo
