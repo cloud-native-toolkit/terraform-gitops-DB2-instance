@@ -2,6 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: db2oltp-operandreg-job
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
 spec:
   parallelism: 1
   completions: 1
@@ -36,4 +38,4 @@ spec:
           - name: COMMAN_SERVICES_NAMESPACE
             value: {{ .Values.COMMAN_SERVICES_NAMESPACE }}
           - name: ZEN_OPERATORS_NAMESPACE
-            value: {{ .Values.ZEN_OPERATORS_NAMESPACE }}
+            value: {{ .Values.operator_namespace }}
