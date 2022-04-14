@@ -74,7 +74,7 @@ module setup_rbac {
     {
       apiGroups = ["operator.ibm.com"]
       resources = ["operandregistries"]
-      verbs = ["get", "apply", "list"]
+      verbs = ["get", "apply", "list", "patch"]
     }
   ]
   server_name               = var.server_name
