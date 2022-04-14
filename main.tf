@@ -56,6 +56,7 @@ module setup_service_account {
 
   gitops_config = var.gitops_config
   git_credentials = var.git_credentials
+  namespace = var.cpd_namespace
   name = "db2oltp-operandreg-sa"
   server_name = var.server_name  
 }
