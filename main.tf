@@ -15,6 +15,7 @@ locals {
   subscription_content = {
     name = "ibm-db2oltp-cp4d-operator-catalog-subscription"
     operator_namespace = var.operator_namespace
+    common_services_namespace = var.common_services_namespace
     syncWave = "-5"
     spec = {
       channel = var.channel
