@@ -8,7 +8,7 @@ spec:
   parallelism: 1
   completions: 1
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       name: db2oltp-operandreg-pod
