@@ -2,7 +2,7 @@
 
 ZEN_OPERATORS_NAMESPACE="${ZEN_OPERATORS_NAMESPACE}"
 COMMON_SERVICES_NAMESPACE="${COMMON_SERVICES_NAMESPACE}"
-SOURCE_NAME="ibm-db2uoperator-catalog"
+SOURCE_NAME="ibm-operator-catalog"
 
 oc get operandregistry common-service -n ${COMMON_SERVICES_NAMESPACE} -o json > /temp/operandregistry.json
 
