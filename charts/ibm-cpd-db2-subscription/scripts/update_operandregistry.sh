@@ -3,7 +3,7 @@
 ZEN_OPERATORS_NAMESPACE="${ZEN_OPERATORS_NAMESPACE}"
 COMMON_SERVICES_NAMESPACE="${COMMON_SERVICES_NAMESPACE}"
 
-echo "success 1"
+echo "success 1 : "${COMMON_SERVICES_NAMESPACE}""
 
 oc get operandregistry common-service -n ${COMMON_SERVICES_NAMESPACE} -o json > /temp/operandregistry.json
 
