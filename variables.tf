@@ -116,6 +116,12 @@ variable "cpd_namespace" {
   default = "gitops-cp4d-instance"
 }
 
+variable "common_services_namespace" {
+  type        = string
+  description = "IBM Common Services namespace"
+  default = "ibm-common-services"
+}
+
 
 
 

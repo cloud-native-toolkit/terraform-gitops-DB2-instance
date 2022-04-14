@@ -61,6 +61,26 @@ module setup_service_account {
   server_name = var.server_name  
 }
 
+module setup_rbac {
+  source = "github.com/cloud-native-toolkit/terraform-gitops-rbac.git?ref=v1.7.1"
+
+  gitops_config             = var.gitops_config
+  git_credentials           = var.git_credentials
+  service_account_namespace = local.namespace
+  service_account_name      = "db2oltp-operandreg-sa"
+  namespace                 = var.common_services_namespace
+  rules                     = [
+    {
+      apiGroups = ["operator.ibm.com"]
+      resources = ["operandregistries"]
+      verbs = ["get", "apply", "list"]
+    }
+  ]
+  server_name               = var.server_name
+  cluster_scope             = true
+}
+
+
 resource null_resource setup_gitops_subscription {
   depends_on = [null_resource.create_subcription_yaml]
 
