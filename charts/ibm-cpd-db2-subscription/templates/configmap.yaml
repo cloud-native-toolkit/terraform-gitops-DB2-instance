@@ -19,7 +19,7 @@ data:
 
     echo "success 2"
 
-    jq '(.spec.operators[] | select(.name == "ibm-db2u-operator")).namespace = "${ZEN_OPERATORS_NAMESPACE}"' /temp/operandregistry.json > /temp/operandregistry_new.json
+    jq '(.spec.operators[] | select(.name == "ibm-db2u-operator")).namespace = ${ZEN_OPERATORS_NAMESPACE}' /temp/operandregistry.json > /temp/operandregistry_new.json
 
     echo "success 3"
 
