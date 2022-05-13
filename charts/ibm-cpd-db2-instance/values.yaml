@@ -1,10 +1,6 @@
-db2instance:
-  name: db2oltp-cr
-  cpd_namespace: gitops-cp4d-instance   
-  spec:
-   license:
-    accept: true
-    license: Community     # Specify the license you purchased
+db2instance_name: db2oltp-cr
+cpd_namespace: gitops-cp4d-instance   
+license: Enterprise     # Specify the license you purchased
     
 
 
