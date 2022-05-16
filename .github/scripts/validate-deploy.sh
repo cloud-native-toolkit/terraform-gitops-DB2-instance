@@ -71,10 +71,15 @@ echo "DB2 OLTP Operator is READY"
 echo "CPD_NAMESPACE *****"${CPD_NAMESPACE}""
 sleep 60
 INSTANCE_STATUS=""
+count=0
 
 while [ true ]; do
   INSTANCE_STATUS=$(kubectl get Db2oltpService db2oltp-cr -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
   echo "Waiting for instance "${INSTANCE_NAME}" to be ready. Current status : "${INSTANCE_STATUS}""
+  count=$((count + 1))
+  if [ $count -eq 50 ]; then
+    break
+  fi
   if [ $INSTANCE_STATUS == "Completed" ]; then
     break
   fi

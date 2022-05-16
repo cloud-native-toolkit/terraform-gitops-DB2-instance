@@ -27,16 +27,10 @@ locals {
   } 
   
   instance_content = {
-    name = "db2oltp-cr2"
+    name = "db2oltp-cr"
     cpd_namespace = var.cpd_namespace
-    spec = {
-      license = {
-        accept = "true"
-        license = var.license 
-        db_type = "db2oltp"
-        }      
-      }               
-    }    
+    license = var.license 
+  }    
 }
 
 module setup_clis {
