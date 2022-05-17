@@ -18,7 +18,7 @@ locals {
     name = "ibm-db2oltp-cp4d-operator-catalog-subscription"
     operator_namespace = var.operator_namespace
     common_services_namespace = var.common_services_namespace
-    syncWave = "-5"
+    syncWave = "-6"
     spec = {
       channel = var.channel
       installPlanApproval = "Automatic"
@@ -31,7 +31,8 @@ locals {
   instance_content = {
     name = "db2oltp-cr"
     cpd_namespace = var.cpd_namespace
-    license = var.license 
+    license = var.license
+    syncWave = "-3"
   }    
 }
 
