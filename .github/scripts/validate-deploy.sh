@@ -60,7 +60,7 @@ sleep 30
 echo "Check Job status for update to OperandRegistry"
 count=0
 while [ true ]; do
-  JOB_STATUS=$(kubectl get job db2oltp-operandreg-job --no-headers | awk '{print $2}')
+  JOB_STATUS=$(kubectl get job  -n "${NAMESPACE}" db2oltp-operandreg-job --no-headers | awk '{print $2}')
   if [ $JOB_STATUS == '1/1' ]; then
     echo "Job Completed"
     break
