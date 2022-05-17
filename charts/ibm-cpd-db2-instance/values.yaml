@@ -1,6 +1,6 @@
 name: db2oltp-cr
 cpd_namespace: gitops-cp4d-instance   
-license: Enterprise     # Specify the license you purchased
+license: Advanced     # Specify the license you purchased
 syncWave: "-3"
     
 
