@@ -1,9 +1,11 @@
 locals {
   name          = "ibm-cpd-db2-instance"
   subscription_name  = "ibm-cpd-db2-subscription"
+  operandregistry_name = "ibm-cpd-db2-operandregistry"
   bin_dir       = module.setup_clis.bin_dir  
   subscription_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
   instance_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
+  operandregistry_yaml_dir = "${path.cwd}/.tmp/${local.name}/chart/${local.operandregistry_name}"
   service_url   = "http://${local.name}.${var.namespace}"
   sa_name       = "ibm-db2-ibm-db2"
   layer = "services"
@@ -36,15 +38,6 @@ locals {
 module setup_clis {
   source = "github.com/cloud-native-toolkit/terraform-util-clis.git"
 }
-resource null_resource create_subcription_yaml {
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${local.subscription_name}' '${local.subscription_yaml_dir}'"
-
-    environment = {
-      VALUES_CONTENT = yamlencode(local.subscription_content)
-    }
-  }
-}
 
 module setup_service_account {
   source = "github.com/cloud-native-toolkit/terraform-gitops-service-account.git"
@@ -75,6 +68,61 @@ module setup_rbac {
   cluster_scope             = true
 }
 
+resource null_resource create_operandregistry_yaml {
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/create-yaml.sh '${local.operandregistry_name}' '${local.operandregistry_yaml_dir}'"
+
+    environment = {
+      VALUES_CONTENT = yamlencode(local.subscription_content)
+    }
+  }
+}
+
+resource null_resource setup_gitops_operandregistry {
+  depends_on = [null_resource.create_operandregistry_yaml]
+
+  triggers = {
+    name = local.operandregistry_name
+    namespace = var.namespace
+    yaml_dir = local.operandregistry_yaml_dir
+    server_name = var.server_name
+    layer = local.layer
+    type = local.operator_type
+    git_credentials = yamlencode(var.git_credentials)
+    gitops_config   = yamlencode(var.gitops_config)
+    bin_dir = local.bin_dir
+  }
+
+  provisioner "local-exec" {
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' --type '${self.triggers.type}'"
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --delete --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' --type '${self.triggers.type}'"
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+}
+
+resource null_resource create_subcription_yaml {
+  depends_on = [null_resource.setup_gitops_operandregistry]
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/create-yaml.sh '${local.subscription_name}' '${local.subscription_yaml_dir}'"
+
+    environment = {
+      VALUES_CONTENT = yamlencode(local.subscription_content)
+    }
+  }
+}
 
 resource null_resource setup_gitops_subscription {
   depends_on = [null_resource.create_subcription_yaml]
@@ -112,6 +160,7 @@ resource null_resource setup_gitops_subscription {
 }
 
 resource null_resource create_instance_yaml {
+  depends_on = [null_resource.setup_gitops_subscription]
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.instance_yaml_dir}'"
 

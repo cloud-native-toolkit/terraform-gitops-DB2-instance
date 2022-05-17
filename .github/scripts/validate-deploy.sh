@@ -73,7 +73,7 @@ while [ true ]; do
   sleep 30
 done
 
-sleep 30
+sleep 120
 
 CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
 echo "CSV ***** "${CSV}""
