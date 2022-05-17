@@ -57,9 +57,26 @@ echo "OPERATOR_NAMESPACE ***** "${OPERATOR_NAMESPACE}""
 echo "SUBSCRIPTION_NAME *****"${SUBSCRIPTION_NAME}""
 sleep 30
 
+echo "Check Job status for update to OperandRegistry"
+count=0
+while [ true ]; do
+  JOB_STATUS=$(kubectl get job db2oltp-operandreg-job --no-headers | awk '{print $2}')
+  if [ $JOB_STATUS == '1/1' ]; then
+    echo "Job Completed"
+    break
+  fi
+  count=$((count + 1))
+  if [ $count -eq 10 ]; then
+    echo "Timed out waiting for CR: ${INSTANCE_NAME}"
+    exit 1
+  fi
+  sleep 30
+done
+
 CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
 echo "CSV ***** "${CSV}""
 SUB_STATUS=0
+count=0
 while [[ $SUB_STATUS -ne 1 ]]; do
   sleep 10
   SUB_STATUS=$(kubectl get deployments -n "${OPERATOR_NAMESPACE}" -l olm.owner="${CSV}" -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
@@ -78,7 +95,8 @@ while [ true ]; do
   echo "Waiting for instance "${INSTANCE_NAME}" to be ready. Current status : "${INSTANCE_STATUS}""
   count=$((count + 1))
   if [ $count -eq 50 ]; then
-    break
+    echo "Timed out waiting for CR: ${INSTANCE_NAME}"
+    exit 1
   fi
   if [ $INSTANCE_STATUS == "Completed" ]; then
     break
