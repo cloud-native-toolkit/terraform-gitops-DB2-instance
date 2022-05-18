@@ -108,6 +108,10 @@ done
 
 echo "DB2 Db2oltpService/db2oltp-cr is ${INSTANCE_STATUS}"
 
+oc delete Db2oltpService db2oltp-cr -n ${CPD_NAMESPACE}
+
+oc delete csv ${CSV} -n ${OPERATOR_NAMESPACE}
+
 cd ..
 rm -rf .testrepo
 
