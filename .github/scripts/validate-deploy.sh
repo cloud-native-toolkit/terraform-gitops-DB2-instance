@@ -55,21 +55,64 @@ fi
 
 echo "OPERATOR_NAMESPACE ***** "${OPERATOR_NAMESPACE}""
 echo "SUBSCRIPTION_NAME *****"${SUBSCRIPTION_NAME}""
-sleep 15
+sleep 30
+
+echo "Check Job status for update to OperandRegistry"
+count=0
+while [ true ]; do
+  JOB_STATUS=$(kubectl get job  -n "${NAMESPACE}" db2oltp-operandreg-job --no-headers | awk '{print $2}')
+  if [ $JOB_STATUS == '1/1' ]; then
+    echo "Job Completed"
+    break
+  fi
+  count=$((count + 1))
+  if [ $count -eq 10 ]; then
+    echo "Timed out waiting for CR: ${INSTANCE_NAME}"
+    exit 1
+  fi
+  sleep 30
+done
+
+sleep 120
 
 CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
 echo "CSV ***** "${CSV}""
 SUB_STATUS=0
-while [ $SUB_STATUS != 1 ]; do
-  sleep 5
+count=0
+while [[ $SUB_STATUS -ne 1 ]]; do
+  sleep 10
   SUB_STATUS=$(kubectl get deployments -n "${OPERATOR_NAMESPACE}" -l olm.owner="${CSV}" -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
   echo "SUB_STATUS ${SUB_STATUS} **** Waiting for subscription/${SUBSCRIPTION_NAME} in ${OPERATOR_NAMESPACE}"
 done
 
+echo "DB2 OLTP Operator is READY"
+
 echo "CPD_NAMESPACE *****"${CPD_NAMESPACE}""
-sleep 30
-INST_STATUS=$(kubectl get Db2oltpService db2oltp-cr -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
-echo "DB2 Db2oltpService/db2oltp-cr is ${INST_STATUS}"
+sleep 60
+INSTANCE_STATUS=""
+count=0
+
+while [ true ]; do
+  INSTANCE_STATUS=$(kubectl get Db2oltpService db2oltp-cr -n "${CPD_NAMESPACE}" -o jsonpath='{.status.db2oltpStatus} {"\n"}')
+  echo "Waiting for instance "${INSTANCE_NAME}" to be ready. Current status : "${INSTANCE_STATUS}""
+  count=$((count + 1))
+  if [ $count -eq 50 ]; then
+    echo "Timed out waiting for CR: ${INSTANCE_NAME}"
+    exit 1
+  fi
+  if [ $INSTANCE_STATUS == "Completed" ]; then
+    break
+  fi
+  sleep 30
+done
+
+echo "DB2 Db2oltpService/db2oltp-cr is ${INSTANCE_STATUS}"
+
+echo "Uninstalling DB2 OLTP service and operator"
+
+oc delete Db2oltpService db2oltp-cr -n ${CPD_NAMESPACE}
+
+oc delete csv ${CSV} -n ${OPERATOR_NAMESPACE}
 
 cd ..
 rm -rf .testrepo

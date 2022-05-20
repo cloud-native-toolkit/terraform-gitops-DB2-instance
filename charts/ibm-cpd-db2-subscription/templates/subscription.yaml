@@ -4,9 +4,6 @@ metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.operator_namespace }} 
   annotations:
-    argocd.argoproj.io/sync-wave: {{ .Values.syncWave | default "-5" | quote }}     
+    argocd.argoproj.io/sync-wave: {{ .Values.syncWave | default "-6" | quote }}     
 spec:
   {{- toYaml .Values.spec | nindent 2 }}
-
-
-  

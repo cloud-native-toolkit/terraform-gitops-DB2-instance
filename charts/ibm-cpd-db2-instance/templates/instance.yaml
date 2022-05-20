@@ -1,15 +1,11 @@
-
 apiVersion: databases.cpd.ibm.com/v1
 kind: Db2oltpService       
 metadata:
-  name: {{ .Values.db2instance.name }}
+  name: {{ .Values.name }}
   namespace: {{ .Values.cpd_namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .Values.syncWave | default "-3" | quote }}  
 spec:  
   license:
     accept: true
-    license: Advanced     # Specify the license you purchased
-
-
-
-    
-    
+    license: {{ .Values.license }}
