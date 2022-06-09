@@ -2,17 +2,17 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-name: ibm-db2oltp-cp4d-operator-catalog-subscription
-operator_namespace: cpd-operators
-common_services_namespace: ibm-common-services
-cpd_namespace: gitops-cp4d-instance
-syncWave: "-5"
-spec:
-  channel: v1.0
-  installPlanApproval: Automatic
-  name: ibm-db2oltp-cp4d-operator
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace
+# name: ibm-db2oltp-cp4d-operator-catalog-subscription
+# operator_namespace: cpd-operators
+# common_services_namespace: ibm-common-services
+# cpd_namespace: gitops-cp4d-instance
+# syncWave: "-5"
+# spec:
+#   channel: v1.0
+#   installPlanApproval: Automatic
+#   name: ibm-db2oltp-cp4d-operator
+#   source: ibm-operator-catalog
+#   sourceNamespace: openshift-marketplace
 
 
 
